@@ -21,4 +21,27 @@ function D_revised = CS4300_AC1(G,D,P)
 % Fall 2016
 %
 
+queue = {};
+[N, M]= size(G);
+change = 0;
+
+
+for i = 1:N
+    for j = 1:M
+        if  G(i, j) == 1
+            queue = {i,j};
+        end
+    end
+end
+change =1;
+[n,m] = size(queue);
+while change==1 
+    for i =1:n
+        for j = 1:m
+            change = revise(queue(i,j), P);
+        end
+    end
+end
+    
+
 
