@@ -21,7 +21,7 @@ for N = 4:10
         for t = 1:200
             D = rand(N,N) <p ;
             %timer start
-            D = CS4300_AC1(G, D, p);
+            Dr = CS4300_AC1(G, D, p);
         end
     end
 end

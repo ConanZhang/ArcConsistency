@@ -29,7 +29,7 @@ change = 0;
 for i = 1:N
     for j = 1:M
         if  G(i, j) == 1
-            queue = {i,j};
+            queue{1, j} = {i,j};
         end
     end
 end
@@ -38,7 +38,7 @@ change =1;
 while change==1 
     for i =1:n
         for j = 1:m
-            change = revise(queue(i,j), P);
+            change = CS4300_revise(queue(i,j), P);
         end
     end
 end

@@ -49,9 +49,8 @@ while m>0
                
                neighbors = getNeighbors(i, j,M, G);
                
-               for k = 1: size(neighbors)(2)
-                   
-               end
+               for k = 1: size(neighbors)
+               
             end
         end
     end
