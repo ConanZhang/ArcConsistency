@@ -48,9 +48,9 @@ while m>0
                end
                
                neighbors = getNeighbors(i, j,M, G);
-               
-               for k = 1: size(neighbors)(2)
-                   
+               neighborSize = size(neighbors);
+               for k = 1: neighborSize(2)
+                    queue{end+1} = neighbors{1, k};
                end
             end
         end
