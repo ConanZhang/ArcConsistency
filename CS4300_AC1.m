@@ -14,9 +14,11 @@ function D_revised = CS4300_AC1(G,D,P)
 % Call:
 % G = 1 - eye(3,3);
 % D = [1,1,1;1,1,1;1,1,1];
-% Dr = CS4300_AC1(G,D,’CS4300_P_no_attack’);
+% Dr = CS4300_AC1(G,D,'CS4300_P_no_attack' );
 % Author:
-% <Your name>
+% Rajul Ramchandani and Conan Zhang
 % UU
 % Fall 2016
 %
+
+
