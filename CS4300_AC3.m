@@ -50,6 +50,7 @@ while m>0
        [neighbor_row, neighbor_col] = size(neighbours);
        for k = 1: neighbor_col
             queue{end+1} = neighbours{1, k};
+            m = m + 1;
        end
     end
 end
@@ -59,8 +60,8 @@ end
 function neighbours = getNeighbours(i, j, M, G) % neighbours of i not including j, sizeof G M
     neighbours = {};
     for l = 1:M
-        if l~=j
-            neighbours{end+1} = G(i,l);
+        if l~=j && G(i,l)==1 && G(l,i)==1
+            neighbours{end+1} = {i,l};
         end
     end
 end

@@ -44,6 +44,10 @@ for a = 1:i_col
         end
     end
     
+    if D(i,a) ==0
+        delete = 0;
+    end
+    
     if delete == 1
         D(i, a) = 0;
     end
