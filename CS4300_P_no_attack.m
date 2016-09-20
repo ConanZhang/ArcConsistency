@@ -16,7 +16,7 @@ function attack_possible = CS4300_P_no_attack(i,a,j,b)
 %
 attack_possible = 0;
 
-% Check row
+% Check col
 if a == b
     attack_possible = 1;
 end

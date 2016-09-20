@@ -19,17 +19,24 @@ function [delete, D_revised] = CS4300_revise(arc,D, P)
 % Fall 2016
 %
 
-[domain_row,domain_col] = size(D);
-delete = 0;
-node_1 = arc{1,1}{1,1};
-node_2 = arc{1,1}{1,2};
+[i_col,j_col] = size(D);
+delete = 1;
+i = arc{1,1}{1,1};
+j = arc{1,1}{1,2};
 
-for a = 1:domain_row
-    for b = 1:domain_col
-        if feval(P, node_1, a, node_2, b)
-            D(node_1, a) = 0;
-            delete = 1;
+for a = 1:i_col
+    for b = 1:j_col
+        % If our current nodes are 0, don't check them
+        if D(i, a) ~= 0 || D(b, j) ~= 0
+            % If at least one node can support node i, done't delete it
+            if feval(P, i, a, j, b) == 0
+                delete = 0;
+            end
         end
+    end
+    
+    if delete == 1
+        D(i, a) = 0;
     end
 end
 
