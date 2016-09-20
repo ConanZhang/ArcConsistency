@@ -23,8 +23,7 @@ function D_revised = CS4300_AC1(G,D,P)
 
 queue = {};
 [N, M]= size(G);
-delete = 0;
-
+delete = 1;
 
 for i = 1:N
     for j = 1:M
@@ -33,10 +32,8 @@ for i = 1:N
         end
     end
 end
-delete =1;
 
 [n,m] = size(queue);
-[dr, dc] = size(D);
 
 while delete == 1
     delete = 1;

@@ -24,13 +24,11 @@ function D_revised = CS4300_AC3(G,D,P)
 
 queue = {};
 [N, M]= size(G);
-change = 0;
-
 
 for i = 1:N
     for j = 1:M
         if  G(i, j) == 1
-            queue = {i,j};
+            queue{end+1} = {i,j};
         end
     end
 end
@@ -38,40 +36,40 @@ end
 [n,m] = size(queue);
 
 while m>0
-    for i =1:n
-        for j = 1:m
-            arc = queue(i,j);
-            queue = queue(:,2:end);
-            if CS4300_revise(arc, D, P)
-               if isEmptyDomain(i, M) 
-                   D_revised = zeros(N,M);
-               end
-               
-               neighbors = getNeighbors(i, j,M, G);
-               neighborSize = size(neighbors);
-               for k = 1: neighborSize(2)
-                    queue{end+1} = neighbors{1, k};
-               end
-            end
-        end
+    arc = queue(1,1);
+    queue = queue(:,2:end);
+    m = m-1;
+    [del, D_rev] = CS4300_revise(arc,D, P);
+    D = D_rev;
+    if del == 1
+       if isEmptyDomain(arc{1,1}{1,1}, M, D) 
+           D_revised = zeros(N,M);
+       end
+
+       neighbours = getNeighbours(arc{1,1}{1,1}, arc{1,1}{1,2},M, G);
+       [neighbor_row, neighbor_col] = size(neighbours);
+       for k = 1: neighbor_col
+            queue{end+1} = neighbours{1, k};
+       end
     end
 end
+D_revised = D;
 end
 
-function neighbors = getNeighbours(i, j, M, G) %neighbours of i not including j, sizeof G M
-    neighbors = {};
+function neighbours = getNeighbours(i, j, M, G) % neighbours of i not including j, sizeof G M
+    neighbours = {};
     for l = 1:M
         if l~=j
-            neighbors{1, i} = G(i,l);
+            neighbours{end+1} = G(i,l);
         end
     end
 end
 
 
-function check = isEmptyDomain(i ,M)
+function check = isEmptyDomain(i,M,D)
     check = 1;
     for l = 1:M
-        if D(i,l)~=0
+        if D(i,l)== 1
             check = 0;
         end
     end
