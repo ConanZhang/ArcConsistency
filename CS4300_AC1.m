@@ -44,7 +44,6 @@ while delete == 1
         for j = 1:m
             [del, D_rev] = CS4300_revise(queue(i,j),D, P);
             delete = del;
-            D_rev
             D = D_rev;
         end
     end
