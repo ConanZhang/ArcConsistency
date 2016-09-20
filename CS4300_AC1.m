@@ -29,19 +29,30 @@ delete = 0;
 for i = 1:N
     for j = 1:M
         if  G(i, j) == 1
-            queue{1, j} = {i,j};
+            queue{end+1} = {i,j};
         end
     end
 end
 delete =1;
+
 [n,m] = size(queue);
-while delete==1 
+[dr, dc] = size(D);
+counter = dr*dc;
+
+while counter==dr*dc
+    counter = 0;
+    delete = 1;
     for i =1:n
         for j = 1:m
-            [delete, D_revised] = CS4300_revise(queue(i,j),D, P);
+            [del, D_rev] = CS4300_revise(queue(i,j),D, P);
+            delete = del;
+            D = D_rev;
+            if delete == 0
+                counter = counter +1;
+            end;
         end
     end
 end
-    
+D_revised = D;
 
 
