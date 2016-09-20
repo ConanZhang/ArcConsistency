@@ -24,7 +24,7 @@ delete = 0;
 
 for a = 1:domain_row
     for b = 1:domain_col
-        if P(arc(1), a, arc(2), b)
+        if P(arc{1,1}, a, arc{1,2}, b)
             D(i, a) = 0;
             delete = 1;
         end
