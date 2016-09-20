@@ -38,7 +38,7 @@ change =1;
 while change==1 
     for i =1:n
         for j = 1:m
-            change = CS4300_revise(queue(i,j), P);
+            change = CS4300_revise(queue(i,j),D, P);
         end
     end
 end

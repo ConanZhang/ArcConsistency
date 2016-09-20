@@ -20,8 +20,4 @@ if i == j || a == b
     attack_possible = 1;
 end
 
-index_difference = abs(i-j);
-domain_difference = abs(a-b);
-
-if index_difference == 0 && domain_difference == 0
-    attack_possible = 1;
+domain_value

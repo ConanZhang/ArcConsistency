@@ -42,7 +42,7 @@ while m>0
         for j = 1:m
             arc = queue(i,j);
             queue = queue(:,2:end);
-            if CS4300_revise(arc , P)
+            if CS4300_revise(arc, D, P)
                if isEmptyDomain(i, M) 
                    D_revised = zeros(N,M);
                end
