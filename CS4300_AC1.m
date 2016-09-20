@@ -37,19 +37,15 @@ delete =1;
 
 [n,m] = size(queue);
 [dr, dc] = size(D);
-counter = dr*dc;
 
-while counter==dr*dc
-    counter = 0;
+while delete == 1
     delete = 1;
     for i =1:n
         for j = 1:m
             [del, D_rev] = CS4300_revise(queue(i,j),D, P);
             delete = del;
+            D_rev
             D = D_rev;
-            if delete == 0
-                counter = counter +1;
-            end;
         end
     end
 end

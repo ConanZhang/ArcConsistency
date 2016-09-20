@@ -34,9 +34,9 @@ end
 for a = 1:i_col
     delete = 1;
     for b = 1:j_col
-        % If our current nodes are 0, don't check them
-        if D(i, a) ~= 0 || D(b, j) ~= 0
-            % If at least one node can support node i, done't delete it
+        % If our current nodes are 1, check them
+        if D(i, a) == 1 && D(j, b) == 1
+            % If at least one node can support node i, don't delete it
             if feval(P, i, a, j, b) == 0
                 delete = 0;
                 break;

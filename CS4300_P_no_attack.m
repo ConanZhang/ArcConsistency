@@ -19,12 +19,21 @@ attack_possible = 0;
 % Check col
 if a == b
     attack_possible = 1;
+    return;
 end
 
-% Check diagonal
-index_difference = abs(i-a);
-domain_difference = abs(j-b);
+% Check right diagonal
+right_index_difference = i-a;
+right_domain_difference = j-b;
 
-if index_difference == domain_difference
+if right_index_difference == right_domain_difference
+    attack_possible = 1;
+end
+
+% Check left diagonal
+left_index_difference = abs(i-j);
+left_domain_difference = abs(a-b);
+
+if left_index_difference == left_domain_difference
     attack_possible = 1;
 end
