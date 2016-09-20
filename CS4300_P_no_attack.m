@@ -16,10 +16,12 @@ function attack_possible = CS4300_P_no_attack(i,a,j,b)
 %
 attack_possible = 0;
 
-if i == j || a == b
+% Check row
+if a == b
     attack_possible = 1;
 end
 
+% Check diagonal
 index_difference = abs(i-a);
 domain_difference = abs(j-b);
 
