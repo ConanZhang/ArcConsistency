@@ -21,11 +21,13 @@ function [delete, D_revised] = CS4300_revise(arc,D, P)
 
 [domain_row,domain_col] = size(D);
 delete = 0;
+node_1 = arc{1,1}{1,1};
+node_2 = arc{1,1}{1,2};
 
 for a = 1:domain_row
     for b = 1:domain_col
-        if P(arc{1,1}, a, arc{1,2}, b)
-            D(i, a) = 0;
+        if feval(P, node_1, a, node_2, b)
+            D(node_1, a) = 0;
             delete = 1;
         end
     end

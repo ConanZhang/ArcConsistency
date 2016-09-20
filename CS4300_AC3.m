@@ -58,7 +58,7 @@ while m>0
 end
 end
 
-function neighbors = getNeighbours(i, j, M, G) %neghbours of i not including j, sizeof G M
+function neighbors = getNeighbours(i, j, M, G) %neighbours of i not including j, sizeof G M
     neighbors = {};
     for l = 1:M
         if l~=j
