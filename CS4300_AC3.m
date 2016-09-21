@@ -44,9 +44,10 @@ while m>0
     if del == 1
        if isEmptyDomain(arc{1,1}{1,1}, M, D) 
            D_revised = zeros(N,M);
+           return;
        end
 
-       neighbours = getNeighbours(arc{1,1}{1,1}, arc{1,1}{1,2},M, G);
+       neighbours = getNeighbours(arc{1,1}{1,1}, arc{1,1}{1,2},N, M, G);
        [neighbor_row, neighbor_col] = size(neighbours);
        for k = 1: neighbor_col
             queue{end+1} = neighbours{1, k};
@@ -57,11 +58,13 @@ end
 D_revised = D;
 end
 
-function neighbours = getNeighbours(i, j, M, G) % neighbours of i not including j, sizeof G M
+function neighbours = getNeighbours(i, j,N, M, G) % neighbours of i not including j, sizeof G M
     neighbours = {};
-    for l = 1:M
-        if l~=j && G(i,l)==1 && G(l,i)==1
-            neighbours{end+1} = {i,l};
+    for k = 1: N
+        for l = 1:M
+            if G(k,l)==1 
+                neighbours{end+1} = {k,l};
+            end
         end
     end
 end

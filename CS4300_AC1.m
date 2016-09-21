@@ -34,13 +34,17 @@ for i = 1:N
 end
 
 [n,m] = size(queue);
-
-while delete == 1
+noChangeCounter = 0;
+%while delete == 1
+while noChangeCounter<m
     delete = 1;
     for i =1:n
         for j = 1:m
             [del, D_rev] = CS4300_revise(queue(i,j),D, P);
             delete = del;
+            if(del==0)
+                noChangeCounter= noChangeCounter+1;
+            end 
             D = D_rev;
         end
     end

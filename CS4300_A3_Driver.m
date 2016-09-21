@@ -17,7 +17,7 @@ for N = 4:10
         %for t = 1:200
             %D = rand(N,N) <p ;
             %AC1 timer start
-            %Dr = CS4300_AC1(G, D, 'CS4300_P_no_attack')
+            
             %AC3 timer start
             D = ones(N,N);
             D(1, 1) = 0;
@@ -27,6 +27,7 @@ for N = 4:10
             D(3, 4) = 0;
             
             Dr = CS4300_AC3(G, D, 'CS4300_P_no_attack')
+            %Dr = CS4300_AC1(G, D, 'CS4300_P_no_attack')
         %end
     end
 end
