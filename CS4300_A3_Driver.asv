@@ -32,14 +32,12 @@ for N = 4:10
             AC1_times(AC1_times_counter) = toc;
             AC1_times_counter = AC1_times_counter +1;
             
-            num_ones_after (AC3_times_counter) = countOnesHelper(Dr);
-            
             tic;
             Dr = CS4300_AC3(G, D, 'CS4300_P_no_attack');
             AC3_times(AC3_times_counter) = toc;
             AC3_times_counter = AC3_times_counter +1;
             
-            
+            num_ones_after (AC3_times_counter) = countOnesHelper(Dr);
         end
     end
     
