@@ -42,7 +42,7 @@ for a = 1:i_col
             if feval(P, i, a, j, b) == 1
                 count = count-1;
             end
-            
+           
         elseif D(j,b) ==0
             count = count -1;
         end    

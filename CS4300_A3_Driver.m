@@ -29,11 +29,8 @@ for N = 4:10
         toc_timer_AC1 = 0;
         toc_timer_AC3 = 0;
         for t = 1:200
-            %D = rand(N,N) <p ;
-            D = ones(4,4);
-            D(2,2) =0;
-            D(2,3)=0;
-            D(2,4)= 0;
+            D = rand(N,N) <p ;
+
             num_ones_before (AC1_times_counter)= countOnesHelper(D);
             
             tic;
@@ -73,17 +70,17 @@ end
 %   ylabel('Number of Ones')
 
 %AC1 Times plot
-% plot(AC1_times);
+ plot(AC1_times);
  %set(gca,'YTick',[0, 1] );
-%   title('Figure 1: AC-1 Trial Times')
-%   xlabel('Trials with varied probabilities of 1s and Number of Queens')
-%   ylabel('Time')
+   title('Figure 1: AC-1 Trial Times')
+   xlabel('Trials with varied probabilities of 1s and Number of Queens')
+   ylabel('Time')
 
-  plot(AC3_times);
-%   %set(gca,'YTick',[0, 1] );
-  title('Figure 2: AC-3 Trial Times')
-  xlabel('Trials with varied probabilities of 1s and Number of Queens')
-  ylabel('Time')
+%   plot(AC3_times);
+% %   %set(gca,'YTick',[0, 1] );
+%   title('Figure 2: AC-3 Trial Times')
+%   xlabel('Trials varied probabilities of 1s and Number of Queens')
+%   ylabel('Time')
 
 end
 
