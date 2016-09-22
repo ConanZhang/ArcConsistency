@@ -62,7 +62,7 @@ function neighbours = getNeighbours(i, j,N, M, G) % neighbours of i not includin
     neighbours = {};
     for k = 1: N
         for l = 1:M
-            if G(k,l)==1 && l~=j
+            if G(k,l)==1 
                 neighbours{end+1} = {k,l};
             end
         end
