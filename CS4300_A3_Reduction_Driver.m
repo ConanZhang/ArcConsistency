@@ -16,84 +16,124 @@ function P = CS4300_A3_Reduction_Driver()
 % AC3_times = zeros(6*200*7, 1);
 % AC1_times = zeros(6*7, 1);
 % AC3_times = zeros(6*7, 1);
-% AC1_times_counter = 1;
-% AC3_times_counter = 1;
+AC1_times_counter = 1;
+AC3_times_counter = 1;
 
 % toc_timer_AC1 = 0;
 % toc_timer_AC3 = 0;
-% num_ones_before = zeros(6*200*7, 1);
-% num_ones_after = zeros(6*200*7, 1);
+num_ones_before = zeros(6*200*7, 1);
+num_ones_after = zeros(6*200*7, 1);
+reductions = zeros(6*200*7, 1);
 
 for N = 4:10
     G = ~ eye(N,N);
     for p = 0:0.2:1
-%         toc_timer_AC1 = 0;
-%         toc_timer_AC3 = 0;
         for t = 1:200
             D = rand(N,N) <p ;
-
-            num_ones_before (AC1_times_counter)= countOnesHelper(D);
-            
-%             tic;
+            num_ones_before (AC1_times_counter)= sum(sum(D));
             Dr = CS4300_AC1(G, D, 'CS4300_P_no_attack'); 
-            %AC1_times(AC1_times_counter) = toc;
-            %AC1_times_counter = AC1_times_counter +1;
-%             toc_timer_AC1 = toc_timer_AC1 + toc;
             
-            
-            num_ones_after (AC3_times_counter) = countOnesHelper(Dr);
-            
-%             tic;
-            Dr = CS4300_AC3(G, D, 'CS4300_P_no_attack');
-            %AC3_times(AC3_times_counter) = toc;
-            %AC3_times_counter = AC3_times_counter +1;
-%             toc_timer_AC3 = toc_timer_AC3 + toc;
-            
-            
+            num_ones_after (AC1_times_counter) = sum(sum(Dr));
+            reductions(AC1_times_counter) = num_ones_before(AC1_times_counter) - num_ones_after(AC1_times_counter);
+
+            AC1_times_counter = AC1_times_counter +1;            
+%            Dr = CS4300_AC3(G, D, 'CS4300_P_no_attack');   
         end
-%         AC3_times_counter = AC3_times_counter +1;
-%         AC1_times_counter = AC1_times_counter +1;
-%         AC1_times(AC1_times_counter) = toc_timer_AC1/200;
-%         AC3_times(AC3_times_counter) = toc_timer_AC3/200;
-    end
-    
+    end 
 end
 
-% plot(num_ones_before);
-%   title('Figure 3: Number of Ones Before Algorithms')
-%   xlabel('Trials with varied probabilities of 1s and Number of Queens')
-%   ylabel('Number of Ones')
+N4_ones_before = num_ones_before(1:1200, 1);
+N4_ones_after = num_ones_after(1:1200, 1);
+N4_reductions = reductions(1:1200, 1);
 
+N5_ones_before = num_ones_before(1201:2400, 1);
+N5_ones_after = num_ones_after(1201:2400, 1);
+N5_reductions = reductions(1201:2400, 1);
 
-% plot(num_ones_after);
-%   title('Figure 4: Number of Ones After Algorithms')
-%   xlabel('Trials with varied probabilities of 1s and Number of Queens')
-%   ylabel('Number of Ones')
+N6_ones_before = num_ones_before(2401:3600, 1);
+N6_ones_after = num_ones_after(2401:3600, 1);
+N6_reductions = reductions(2401:3600, 1);
 
-%AC1 Times plot
-%  plot(AC1_times);
-%  set(gca,'YTick',[0, 1] );
-%    title('Figure 1: AC-1 Trial Times')
-%    xlabel('Trials with varied probabilities of 1s and Number of Queens')
-%    ylabel('Time')
+N7_ones_before = num_ones_before(3601:4800, 1);
+N7_ones_after = num_ones_after(3601:4800, 1);
+N7_reductions = reductions(3601:4800, 1);
 
-%   plot(AC3_times);
-% %   %set(gca,'YTick',[0, 1] );
-%   title('Figure 2: AC-3 Trial Times')
-%   xlabel('Trials varied probabilities of 1s and Number of Queens')
-%   ylabel('Time')
+N8_ones_before = num_ones_before(4801:6000, 1);
+N8_ones_after = num_ones_after(4801:6000, 1);
+N8_reductions = reductions(4801:6000, 1);
 
-end
+N9_ones_before = num_ones_before(6001:7200, 1);
+N9_ones_after = num_ones_after(6001:7200, 1);
+N9_reductions = reductions(6001:7200, 1);
 
-function one_count = countOnesHelper(matrix)
-[n, m] = size(matrix);
-one_count = 0;
-for i= 1:n
-    for j= 1:m
-        if matrix(i,j)==1
-            one_count = one_count +1;
-        end
+N10_ones_before = num_ones_before(7201:8400, 1);
+N10_ones_after = num_ones_after(7201:8400, 1);
+N10_reductions = reductions(7201:8400, 1);
+
+expected_reduction = zeros(7, 101);
+expected_reduction_count = zeros(7, 101);
+
+xls = linspace(1, 7);
+ 
+for i = 1:1200
+    if N4_ones_before(i) ~= 0
+        expected_reduction(1, N4_ones_before(i)) = expected_reduction(1, N4_ones_before(i)) + N4_reductions(i);
+        expected_reduction_count(1, N4_ones_before(i)) = expected_reduction_count(1, N4_ones_before(i)) + 1;
     end
 end
 
+for i = 1:1200
+    if N5_ones_before(i) ~= 0
+        expected_reduction(2, N5_ones_before(i)) = expected_reduction(2, N5_ones_before(i)) + N5_reductions(i);
+        expected_reduction_count(2, N5_ones_before(i)) = expected_reduction_count(2, N5_ones_before(i)) + 1;
+    end
+end
+
+for i = 1:1200
+    if N6_ones_before(i) ~= 0
+        expected_reduction(3, N6_ones_before(i)) = expected_reduction(3, N6_ones_before(i)) + N6_reductions(i);
+        expected_reduction_count(3, N6_ones_before(i)) = expected_reduction_count(3, N6_ones_before(i)) + 1;
+    end
+end
+
+for i = 1:1200
+    if N7_ones_before(i) ~= 0
+        expected_reduction(4, N7_ones_before(i)) = expected_reduction(4, N7_ones_before(i)) + N7_reductions(i);
+        expected_reduction_count(4, N7_ones_before(i)) = expected_reduction_count(4, N7_ones_before(i)) + 1;
+    end
+end
+
+for i = 1:1200
+    if N8_ones_before(i) ~= 0
+        expected_reduction(5, N8_ones_before(i)) = expected_reduction(5, N8_ones_before(i)) + N8_reductions(i);
+        expected_reduction_count(5, N8_ones_before(i)) = expected_reduction_count(5, N8_ones_before(i)) + 1;
+    end
+end
+
+for i = 1:1200
+    if N9_ones_before(i) ~= 0
+        expected_reduction(6, N9_ones_before(i)) = expected_reduction(6, N9_ones_before(i)) + N9_reductions(i);
+        expected_reduction_count(6, N9_ones_before(i)) = expected_reduction_count(6, N9_ones_before(i)) + 1;
+    end
+end
+
+for i = 1:1200
+    if N10_ones_before(i) ~= 0
+        expected_reduction(7, N10_ones_before(i)) = expected_reduction(7, N10_ones_before(i)) + N10_reductions(i);
+        expected_reduction_count(7, N10_ones_before(i)) = expected_reduction_count(7, N10_ones_before(i)) + 1;
+    end
+end
+
+for i=1:7
+    for j=1:101
+        if i == 3
+            expected_reduction(i,j)
+            expected_reduction_count(i,j)
+        end
+        expected_reduction(i,j) = expected_reduction(i,j) / expected_reduction_count(i,j);
+    end
+end
+
+plot(1:101, expected_reduction(1:7, 1:101))
+legend('N=4','N=5','N=6','N=7','N=8','N=9','N=10');
 end
